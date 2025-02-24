@@ -21,14 +21,14 @@ async def cmd_start(message: Message):
     )
 
 # /newTask
-@router.message(Command('newTask'))
+@router.message(Command('newtask'))
 async def in_name_task(message: Message, state: FSMContext):
     await state.update_data(action="create")
     await state.set_state(Task.name)
     await message.answer("Введите название заметки")
 
 # /allTask
-@router.message(Command('allTask'))
+@router.message(Command('alltask'))
 async def show_tasks(message: Message):
     user_tg = message.chat.id
     tasks = await get_user_tasks(user_tg)
@@ -40,7 +40,7 @@ async def show_tasks(message: Message):
     await message.answer("Ваши заметки:", reply_markup=kb_inline.allTasks_keyboard(tasks))
 
 # /completedTask
-@router.message(Command('completedTask'))
+@router.message(Command('completedtask'))
 async def show_completed_tasks(message: Message):
     user_tg = message.chat.id
     tasks = await get_user_tasks_completed(user_tg)
