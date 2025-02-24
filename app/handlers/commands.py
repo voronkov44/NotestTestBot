@@ -5,14 +5,15 @@ from aiogram.fsm.context import FSMContext
 
 from app.states import Task
 from app.database import save_user_to_db, get_user_tasks, get_user_tasks_completed
-from app.keyboards import reply as kb_reply, inline as kb_inline
+from app.keyboards import inline as kb_inline
 
 router = Router()
+
 
 # /start
 @router.message(CommandStart())
 async def cmd_start(message: Message):
-    await message.answer(f'Привет, {message.from_user.first_name}!\nЭто бот с заметками', reply_markup=kb_reply.main)
+    await message.answer(f'Привет, {message.from_user.first_name}!\nЭто бот с задачами')
     await save_user_to_db(
         user_tg=message.chat.id,
         username=message.from_user.username,
